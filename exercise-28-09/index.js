@@ -4,15 +4,15 @@ const app = express();
 app.use(express.json());
 
 app.get('/me', (req, res) => {
-    res.json({ name: 'Alexander', age: 25, country: 'Argentina' });
+    res.json({ name: 'Alejandra', age: 32, country: 'México' });
 });
 
 app.post('/metas', (req, res) => {
-    res.json(['Programming', 'Games', 'Sleep']);
+    res.json(['Programming', 'Games', 'Swimming']);
 });
 
 app.patch('/metas', (req, res) => {
-    res.json(['I wanna escape from Argentina', 'I wanna continue studiyng english']);
+    res.json(['I wanna travel around the World', 'I wanna learn a new languaje']);
 });
 
 app.put('/business', (req, res) => {
