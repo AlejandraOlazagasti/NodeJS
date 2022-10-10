@@ -11,6 +11,9 @@ const app = express()
 //variable global (importación)
 const config = require('./config')
 
+//Importación de las rutas
+const moviesRouter = require('./movies/movies.router')
+
 //verifica si la conexión con la base de datos fue o no exitosa
 db.authenticate()
   .then(() => console.log('DB Authentication Succesfully'))
@@ -28,6 +31,8 @@ app.use(express.json())
 app.get('/', (req, res) => {
   res.status(200).json({message: 'OK!'})
 })
+
+app.use('/movies', moviesRouter)
 
 app.listen(config.port, () => {
   console.log(`Server started at port ${config.port}`)

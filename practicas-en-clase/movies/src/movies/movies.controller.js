@@ -7,9 +7,10 @@ const getAllMovies = async () => {
   return data
 }
 
-getAllMovies()
+//Así se ejecutaría función getAllMovies
+/*getAllMovies()
    .then((response) => console.log(response))
-   .catch((err) => console.log(err))
+   .catch((err) => console.log(err))*/
 
 const createMovie = async (data) => {
   //esta función hace referencia a sql cuando realizabamos "insert into movies (id, name, genre, duration, releaseData) values (uuid.v4(), data.name, data.genre, data.duration, data.releaseData)"
@@ -23,15 +24,15 @@ const createMovie = async (data) => {
   return newMovie;
 }
 
-//así la ejecutaríamos
-createMovie({
+//así ejecutaríamos createMovie
+/*createMovie({
   name: 'Pacific Rim',
   genre: 'Action, SciFi',
   duration: 120,
   releaseDate: '2012/10/30'
 })
   .then(response => console.log(response))
-  .catch(err => console.log(err))
+  .catch(err => console.log(err))*/
 
 const getMovieById = async (id) => {
   //esta constante es igual a hacer en sql "Select * from movies where id = id"
@@ -43,6 +44,46 @@ const getMovieById = async (id) => {
   return data
 }
 
-// module.exports = {
-//   createMovie
-// }
+//así ejecutaríamos getMovieById
+/*getMovieById('8d8d45e6-a25a-4497-828b-c4f3c8183cab')
+  .then((response) => console.log(response))
+  .catch((err) => console.log(err))*/
+
+const editMovie = async (id, data) => {
+  const response = await Movies.update(data, {
+    where: {
+      id: id,
+    },
+  });
+  return response;//? Si el where no encuentra nada, retorna null
+};
+
+//así ejecutaríamos editMovie
+/*editMovie("15f8484b-d040-4283-911f-7e1361ec7a99", {
+  duration: 130,
+  name:"Hola"
+})
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((err) => {
+   console.log(err);
+  });*/
+
+const deleteMovie = async (id) => {
+  const data = await Movies.destroy({
+      where: {
+          id: id
+      }
+  })
+  return data
+}
+
+
+module.exports = {
+  getAllMovies,
+  getMovieById,
+  createMovie,
+  editMovie,
+  deleteMovie
+};

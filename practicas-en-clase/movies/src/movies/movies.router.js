@@ -1,14 +1,18 @@
 const router = require('express').Router()
 
-//se hace un prefijo para no escribir toda la ruta y prevenir errores
-// /api/v1/movies
+const moviesServices = require('./movies.services')
 
-router.get('/')
-router.post('/')
 
-router.get('/:id')
-router.delete('/:id')
-router.patch('/:id')
-router.put('/:id')
+//? Este es el prefijo: /movies
+
+
+
+router.get('/', moviesServices.getAllMovies) //? /movies/
+router.post('/', moviesServices.postMovie) //? /movies/
+
+router.get('/:id', moviesServices.getMovieById) //? /movies/:id
+router.delete('/:id', moviesServices.deleteMovie) //? /movies/:id
+router.patch('/:id', moviesServices.patchMovie) //? /movies/:id
+//router.put('/:id') //? /movies/:id
 
 module.exports = router
