@@ -61,3 +61,5 @@ const Users = db.define("users", {
     field: 'is_verified'
   },
 });
+
+module.exports = Users
