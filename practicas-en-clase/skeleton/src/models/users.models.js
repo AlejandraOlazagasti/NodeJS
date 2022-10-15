@@ -58,7 +58,8 @@ const Users = db.define("users", {
   isVerified: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    field: 'is_verified'
+    field: 'is_verified',
+    defaultValue: false
   },
 });
 

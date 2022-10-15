@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 
-
+//encripta la contraseña del usuario cuando se crea o se modifica la contraseña
 const hashPassword = (plainPassword) => {
     return bcrypt.hashSync(plainPassword, 10)
 }
