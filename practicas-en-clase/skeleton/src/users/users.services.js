@@ -113,6 +113,20 @@ const getMyUser = (req , res) => {
       res.status(400).json({message: err.message})
     })
 }
+const patchMyUser = (req, res) => {
+  const {id} = req.user;
+  const {firstName, lastName, email, phone, birthday, gender} = req.body;
+  usersControllers.updateUser(id, {firstName, lastName, email, phone, birthday, gender})
+      .then(() => res.status(200).json({message: User ${id} updated successfully}))
+      .catch(error => res.status(400).json(error));
+}
+
+const deleteMyUser = (req, res) => {
+  const {id} = req.user;
+  usersControllers.deleteUser(id)
+      .then(() => res.status(204).json())
+      .catch(error => res.status(400).json(error));
+}
 
 
 module.exports = {
@@ -121,5 +135,7 @@ module.exports = {
   patchUser,
   registerUser,
   deleteUser,
-  getMyUser
+  getMyUser, 
+  deleteMyUser,
+  patchMyUser
 }

@@ -23,10 +23,10 @@ router.get('/', userServices.getAllUsers)
 //? Ruta de informacion propia del usuario loggeado
 router.route('/me')
   .get(
-    passport.authenticate('jwt', {session: false}),
-    userServices.getMyUser)
-  //.patch()
-  //.delete()
+    passport.authenticate('jwt', {session: false}), userServices.getMyUser)
+    .patch(passport.authenticate('jwt', {session: false}), userServices.patchMyUser)
+    .delete(passport.authenticate('jwt', {session: false}), userServices.deleteMyUser)
+  
 
 //? /api/v1/users/:id
 router.route('/:id')
@@ -34,4 +34,6 @@ router.route('/:id')
   .patch(userServices.patchUser)
   .delete(userServices.deleteUser)
 
+  router.route('/me')
+ 
 module.exports = router
