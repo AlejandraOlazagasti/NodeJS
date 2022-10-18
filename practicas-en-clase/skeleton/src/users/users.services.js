@@ -117,7 +117,7 @@ const patchMyUser = (req, res) => {
   const {id} = req.user;
   const {firstName, lastName, email, phone, birthday, gender} = req.body;
   usersControllers.updateUser(id, {firstName, lastName, email, phone, birthday, gender})
-      .then(() => res.status(200).json({message: User ${id} updated successfully}))
+      .then(() => res.status(200).json({message: `User ${id} updated successfully`}))
       .catch(error => res.status(400).json(error));
 }
 
