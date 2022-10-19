@@ -113,20 +113,38 @@ const getMyUser = (req , res) => {
       res.status(400).json({message: err.message})
     })
 }
+
+// TODO crear rutas protegidas /me, con los verbos para update y delete
+
 const patchMyUser = (req, res) => {
   const {id} = req.user;
-  const {firstName, lastName, email, phone, birthday, gender} = req.body;
-  usersControllers.updateUser(id, {firstName, lastName, email, phone, birthday, gender})
-      .then(() => res.status(200).json({message: `User ${id} updated successfully`}))
-      .catch(error => res.status(400).json(error));
+  const {firstName, lastName, phone, birthday, gender, country} = req.body;
+  usersControllers.updateUser(id, {firstName, lastName, phone, birthday, gender, country})
+    .then(() => res.status(200).json({message: 'Your user was edited successfully'}))
+    .catch(error => res.status(400).json(error));
 }
 
+//? 2 tipos de delete:
+//* 1. por administrador
+//* 2. por mi mismo
+
 const deleteMyUser = (req, res) => {
-  const {id} = req.user;
-  usersControllers.deleteUser(id)
-      .then(() => res.status(204).json())
-      .catch(error => res.status(400).json(error));
-}
+  const id = req.user.id;
+  usersControllers.updateUser(id, { status: "inactive" })
+    .then(() => {
+      res.status(200).json({ message: `Your user was deleted succesfully!` });
+    })
+    .catch((err) => {
+      res.status(400).json({ message: err.message });
+    });
+};
+
+// const deleteMyUser = (req, res) => {
+//   const {id} = req.user;
+//   usersControllers.deleteUser(id)
+//     .then(() => res.status(204).json())
+//     .catch(error => res.status(400).json(error));
+// }
 
 
 module.exports = {
